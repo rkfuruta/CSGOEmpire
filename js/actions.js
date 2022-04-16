@@ -24,9 +24,29 @@ let actions = {
         bs: 0.55
     },
     wearThreshold: 75,
+    priceThreshold: -6,
+    config: {
+        priceThreshold: ".option .price-threshold",
+        wearThreshold: ".option .wear-threshold"
+    },
 
     initialize: function() {
-        this.events();
+        this.loadConfig();
+    },
+
+    loadConfig: function() {
+        let self = this;
+        chrome.storage.sync.get(
+            [
+                "priceThreshold",
+                "wearThreshold"
+            ],
+            function(result) {
+                self.priceThreshold = result.priceThreshold;
+                self.wearThreshold = result.wearThreshold;
+                self.events();
+            }
+        );
     },
 
     events: function() {
@@ -35,8 +55,7 @@ let actions = {
 
     checkElement: function(percentage, target) {
         let elementPercent = this.getPercentage(percentage);
-        let configPercent = this.getPercentageThreshold();
-        if (elementPercent !== false && elementPercent <= configPercent) {
+        if (elementPercent !== false && elementPercent <= this.priceThreshold) {
             let elementWear = $(target).find(this.itemWearSelector).html();
             if (this.isGoodWear(elementWear)) {
                 this.changeElement(target, this.color.display);
@@ -91,14 +110,9 @@ let actions = {
         let percentage = $(e.target).html();
         let element = $(e.target).closest(this.itemWrapperSelector);
         let elementPercent = this.getPercentage(percentage);
-        let configPercent = this.getPercentageThreshold();
-        if (elementPercent > configPercent) {
+        if (elementPercent > this.priceThreshold) {
             $(element).css("background-color", this.color.default);
         }
-    },
-
-    getPercentageThreshold: function() {
-        return -6;
     },
 
     getPercentage: function(percentage) {

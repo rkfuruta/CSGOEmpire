@@ -1,0 +1,70 @@
+body {
+    background-color: rgba(26, 28, 36, 1);
+    padding: 20px;
+}
+.fieldset.configs {
+    min-width: 185px;
+    width: 100%;
+}
+.fieldset.configs .option {
+    margin-bottom: 10px;
+}
+.actions button {
+    border: 1px solid rgb(51, 53, 65);
+    background-color: #333541;
+    border-radius: 5px;
+    min-height: 25px;
+    margin-top: 10px;
+    width: 100%;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
+}
+.actions button:hover {
+    background-color: #3a3f50;
+}
+.fieldset.configs .option label {
+    color: rgba(146,147,166,1);
+    font-weight: 800;
+}
+input {
+    margin-top: 5px;
+    padding: 0 10px;
+    min-height: 25px;
+    border-radius: 5px;
+    border: 1px solid rgb(51, 53, 65);
+    background-color: rgba(20,20,25,1);
+    color: rgba(220,220,220,1);
+    outline: none!important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 28, 36, 0.9);
+    z-index: 1;
+}
+.spinner {
+    position: fixed;
+    left: 40%;
+    top: 40%;
+    z-index: 2;
+    border: 8px solid transparent; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
