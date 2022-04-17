@@ -3,6 +3,7 @@ let actions = {
     itemWrapperSelector: '.item__inner',
     itemPercentageSelector: 'button.link.has-tooltip',
     itemWearSelector: '.wear-value',
+    chatOpenSelector: '.chat-tab--chat-open',
     color: {
         default: 'rgba(36,37,47,var(--tw-bg-opacity))',
         warning: '#4c4c00',
@@ -51,6 +52,13 @@ let actions = {
 
     events: function() {
         $("body").on("DOMNodeInserted", this.itemsGridSelector , this.elementCreate.bind(this));
+        this.closeChat();
+    },
+
+    closeChat: function() {
+        if ($(this.chatOpenSelector).length) {
+            $(this.chatOpenSelector).click();
+        }
     },
 
     checkElement: function(percentage, target) {
