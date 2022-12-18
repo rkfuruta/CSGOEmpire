@@ -56,9 +56,13 @@ let actions = {
     },
 
     closeChat: function() {
-        if ($(this.chatOpenSelector).length) {
-            $(this.chatOpenSelector).click();
-        }
+        let chatInterval = setInterval(() => {
+            if ($(this.chatOpenSelector).length) {
+                $(this.chatOpenSelector).click();
+                clearInterval(chatInterval);
+            }
+        })
+
     },
 
     checkElement: function(percentage, target) {
