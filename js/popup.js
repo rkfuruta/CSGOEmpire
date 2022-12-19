@@ -3,7 +3,9 @@ let popup = {
     loaderSelector: '.loader',
     config: {
         priceThreshold: ".option .price-threshold",
-        wearThreshold: ".option .wear-threshold"
+        wearThreshold: ".option .wear-threshold",
+        apiToken: ".option .api-token",
+        cacheLifeTime: ".option .cache-time",
     },
 
     initialize: function() {
@@ -16,11 +18,15 @@ let popup = {
         chrome.storage.sync.get(
             [
                 "priceThreshold",
-                "wearThreshold"
+                "wearThreshold",
+                "apiToken",
+                "cacheLifeTime"
             ],
             function(result) {
                 $(self.config.priceThreshold).val(result.priceThreshold);
                 $(self.config.wearThreshold).val(result.wearThreshold);
+                $(self.config.apiToken).val(result.apiToken);
+                $(self.config.cacheLifeTime).val(result.cacheLifeTime);
             }
         );
     },
@@ -33,6 +39,8 @@ let popup = {
         this.storage({
             "priceThreshold": $(this.config.priceThreshold).val(),
             "wearThreshold": $(this.config.wearThreshold).val(),
+            "apiToken": $(this.config.apiToken).val(),
+            "cacheLifeTime": $(this.config.cacheLifeTime).val()
         });
     },
 
